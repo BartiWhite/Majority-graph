@@ -19,7 +19,7 @@ Algorithm progress can be followed closely in step-by-step mode that show opinio
 
 To set up project on your machine first clone above repository:
 
-> git clone
+> git clone https://github.com/BartiWhite/Majority-graph.git
 
 Now you can open cloned project in your IDE and run it.
 
