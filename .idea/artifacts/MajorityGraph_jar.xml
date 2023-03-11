@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MajorityGraph:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MajorityGraph_jar</output-path>
+    <root id="archive" name="MajorityGraph.jar">
+      <element id="module-output" name="MajorityGraph" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/jcommon-1.0.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/jfreechart-1.0.19.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
