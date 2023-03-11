@@ -12,8 +12,8 @@ It visualizes group in which opinion is being spread as coloured bobbles where e
 Algorithm progress can be followed closely in step-by-step mode that show opinion establishment in each consecutive triad.
 
 <!-- Image -->
-
-![Step-by-step mode]()
+![Step-by-step mode](https://github.com/BartiWhite/Majority-graph/blob/main/images/step-by-step1.png)
+![Step-by-step mode](https://github.com/BartiWhite/Majority-graph/blob/main/images/step-by-step2.png)
 
 ## Usage
 
