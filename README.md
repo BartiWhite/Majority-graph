@@ -13,7 +13,7 @@ Algorithm progress can be followed closely in step-by-step mode that show opinio
 
 <!-- Image -->
 
-[//]: # (![Step-by-step mode]&#40;&#41;)
+![Step-by-step mode]()
 
 ## Usage
 
