@@ -24,3 +24,7 @@ To set up project on your machine first clone above repository:
 Now you can open cloned project in your IDE and run it.
 
 Comprehensive description of application usage was implemented within the app itself.
+
+## Contribution
+
+For any contribution please create new branch for your changes and submit Pull Request with description.
