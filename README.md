@@ -7,7 +7,7 @@ This program simulates opinion changes in group of agents. To simulate agents im
 It visualizes group in which opinion is being spread as coloured bobbles where each bobble represents one agent (group member). To better illustrate overall opinion distribution over time chart panel was introduced.
 
 <!-- Image -->
-![Fluent mode]()
+![Fluent mode](https://github.com/BartiWhite/Majority-graph/blob/main/images/fluent.png)
 
 Algorithm progress can be followed closely in step-by-step mode that show opinion establishment in each consecutive triad.
 
