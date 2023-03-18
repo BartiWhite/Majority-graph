@@ -9,13 +9,13 @@ import javax.swing.JPanel;
 public class AgentsPane extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private List<Circle> circles;
+	private final List<Circle> circles;
 	private List<Opinion> opinions;
 	private List<Integer> opinionIndexes;
-	private BlockingQueue<List<Opinion>> graphQueue;
-	private BlockingQueue<List<Integer>> opinionIndexesQueue;
-	private BlockingQueue<Boolean> nextStep, controlSimFlow, updateChart;
-	private List<Integer> coordinates;
+	private final BlockingQueue<List<Opinion>> graphQueue;
+	private final BlockingQueue<List<Integer>> opinionIndexesQueue;
+	private final BlockingQueue<Boolean> nextStep, controlSimFlow, updateChart;
+	private final List<Integer> coordinates;
 	private int numberOfAgents = 20, index1 = 0, index2 = 0, index3 = 0, simulationSpeed = 1;
 	private double initFor = 0.5;
 	private boolean simulation = false, simulationStop = false, newSimulation = false;
@@ -206,9 +206,9 @@ public class AgentsPane extends JPanel implements Runnable {
 	}
 
 	private void setCoordinates() {
-		int x = 0;
+		int x;
 		Random rand = new Random();
-		Color color = new Color(0);
+		Color color;
 		for (int i = 0; i < numberOfAgents; i++) {
 			x = rand.nextInt(1000);
 			do {
@@ -234,11 +234,6 @@ public class AgentsPane extends JPanel implements Runnable {
 			return true;
 		}
 		return false;
-	}
-
-
-	public int getNumberOfAgents() {
-		return this.numberOfAgents;
 	}
 
 	public void setParameters(int numberOfAgents, double initFor) {
@@ -283,19 +278,7 @@ public class AgentsPane extends JPanel implements Runnable {
 		this.newSimulation = newSimulation;
 	}
 
-	public int getSpeed() {
-		return simulationSpeed;
-	}
-
 	public void setSpeed(int simulationSpeed) {
 		this.simulationSpeed = simulationSpeed;
-	}
-
-	public void incrementSpeed() {
-		simulationSpeed++;
-	}
-
-	public void decrementSpeed() {
-		simulationSpeed--;
 	}
 }

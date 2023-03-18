@@ -3,7 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
 
 public class Circle {
-	private int X, Y, R;
+	private final int X, Y, R;
 	private Color color, ovalColor = Color.black;
 
 	public Circle(int X, int Y, int R, Color color) {
@@ -35,9 +35,5 @@ public class Circle {
 
 	public int getY() {
 		return Y;
-	}
-
-	public Color getColor() {
-		return color;
 	}
 }

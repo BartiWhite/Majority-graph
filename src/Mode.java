@@ -1,4 +1,4 @@
 public enum Mode {
-	FLUENT, STEPOVER;
+	FLUENT, STEPOVER
 
 }

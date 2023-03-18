@@ -4,13 +4,13 @@ import java.util.List;
 public class Person {
 
 //	FIELDS
-	private int id;
-	private List<Person> neighbours = new ArrayList<Person>();
+	private final int id;
+	private final List<Person> neighbours = new ArrayList<>();
 	private Opinion opinion;
 	private boolean isZealot = false;
 	private boolean isGathered = false;
 
-	private static List<Person> peopleList = new ArrayList<>();
+	private static final List<Person> peopleList = new ArrayList<>();
 
 //	CONSTRUCTORS
 	public Person() {
@@ -26,14 +26,6 @@ public class Person {
 //	METHODS
 
 //	GETTERS AND SETTERS
-	public int getId() {
-		return id;
-	}
-
-	public List<Person> getNeighbours() {
-		return neighbours;
-	}
-
 	public void addNeighbour(Person neighbour) {
 		this.neighbours.add(neighbour);
 	}
@@ -45,17 +37,12 @@ public class Person {
 	public void tryToSetOpinion(Opinion opinion) {
 		if (!isZealot) {
 			this.opinion = opinion;
-		} else {
-			// System.out.print("Zealots will persevere");
 		}
+
 	}
 
 	public static List<Person> getPeople() {
 		return peopleList;
-	}
-
-	public static void addToPeople(Person person) {
-		Person.peopleList.add(person);
 	}
 
 	public boolean isZealot() {

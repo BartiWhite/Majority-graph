@@ -22,10 +22,10 @@ public class ChartPane extends JPanel implements Runnable {
 	XYSeriesCollection collection;
 	JFreeChart chart;
 	ChartPanel chartPanel;
-	private BlockingQueue<List<Opinion>> queue;
+	private final BlockingQueue<List<Opinion>> queue;
 	private BlockingQueue<Boolean> updateChart = new ArrayBlockingQueue<>(1);
 	private List<Opinion> opinion = new ArrayList<>();
-	private int forAgents = 10, againstAgents = 10, forZealots = 0, againstZealots = 0, time = 0;
+	private int forZealots = 0, againstZealots = 0, time = 0;
 	private double forField = 0, againstField = 0, forChance = 1, againstChance = 1, initialFor = 0.5, expectedValue,
 			previousValue = initialFor;
 	private Mode mode = Mode.FLUENT;
@@ -60,18 +60,18 @@ public class ChartPane extends JPanel implements Runnable {
 	@Override
 	public void run() {
 
+		Boolean receiveMessage;
 		while (true) {
 			try {
 				opinion = queue.take();
-				Boolean receiveMessage;
 				if (mode == Mode.STEPOVER)
 					receiveMessage = updateChart.take();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 
-			forAgents = 0;
-			againstAgents = 0;
+			int forAgents = 0;
+			int againstAgents = 0;
 
 			for (Opinion i : opinion)
 				if (i.opinionValue == 1)
@@ -80,10 +80,6 @@ public class ChartPane extends JPanel implements Runnable {
 					againstAgents++;
 
 			List<Person> pop = Person.getPeople();
-//			for (Person per : pop) {
-//				if (per.getOpinion() == Opinion.FOR)
-//					;
-//			}
 
 			if (forChance == 1 && againstChance == 1 && forZealots == 0 && againstZealots == 0) {
 				countExpectedValue(1);
