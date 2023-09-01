@@ -1,9 +1,12 @@
+package utils;
+
+import enums.Opinion;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
 
-//	FIELDS
 	private final int id;
 	private final List<Person> neighbours = new ArrayList<>();
 	private Opinion opinion;
@@ -12,7 +15,6 @@ public class Person {
 
 	private static final List<Person> peopleList = new ArrayList<>();
 
-//	CONSTRUCTORS
 	public Person() {
 		this.id = peopleList.isEmpty() ? 0 : peopleList.get(peopleList.size() - 1).id + 1;
 		peopleList.add(this);
@@ -23,9 +25,6 @@ public class Person {
 		this.opinion = opinion;
 	}
 
-//	METHODS
-
-//	GETTERS AND SETTERS
 	public void addNeighbour(Person neighbour) {
 		this.neighbours.add(neighbour);
 	}

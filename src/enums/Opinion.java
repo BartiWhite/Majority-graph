@@ -1,3 +1,5 @@
+package enums;
+
 public enum Opinion {
 	FOR(1), AGAINST(-1);
 

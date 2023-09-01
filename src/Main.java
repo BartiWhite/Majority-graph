@@ -1,3 +1,5 @@
+import panels.GraphicFrame;
+
 import javax.swing.SwingUtilities;
 
 public class Main {

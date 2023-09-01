@@ -1,3 +1,5 @@
+package panels;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,6 +10,8 @@ import java.util.concurrent.BlockingQueue;
 
 import javax.swing.JPanel;
 
+import enums.Mode;
+import enums.Opinion;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

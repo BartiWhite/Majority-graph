@@ -1,3 +1,9 @@
+package panels;
+
+import enums.Mode;
+import enums.Opinion;
+import utils.Person;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -5,7 +11,6 @@ import java.util.concurrent.BlockingQueue;
 
 public class PopulationController implements Runnable {
 
-	// FIELDS
 	private int populationCount = 20;
 	private Double initialFor = 0.5;
 	private Double forField = 0.0, againstField = 0.0;
@@ -20,7 +25,6 @@ public class PopulationController implements Runnable {
 	private final BlockingQueue<List<Integer>> opinionIndexesQueue;
 	private final BlockingQueue<Boolean> controlSimFlow;
 
-// CONSTRUCTORS
 	public PopulationController(BlockingQueue<List<Opinion>> graphQueue,
 			BlockingQueue<List<Integer>> opinionIndexesQueue, BlockingQueue<List<Opinion>> chartQueue,
 			BlockingQueue<Boolean> controlSimFlow) {
@@ -31,8 +35,6 @@ public class PopulationController implements Runnable {
 		this.opinions = new ArrayList<>();
 		initPopulation();
 	}
-
-//	METHODS
 
 	public void initPopulation() {
 		List<Person> pop = Person.getPeople();
@@ -180,8 +182,6 @@ public class PopulationController implements Runnable {
 	public void decrementSpeed() {
 		simulationSpeed--;
 	}
-
-//	GETTERS AND SETTERS
 
 	public List<Opinion> getOpinions() {
 		List<Person> pop = Person.getPeople();

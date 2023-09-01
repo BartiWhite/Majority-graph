@@ -1,4 +1,12 @@
-import java.awt.*;
+package panels;
+
+import enums.Mode;
+import enums.Opinion;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

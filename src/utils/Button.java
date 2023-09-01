@@ -1,4 +1,8 @@
-import javax.swing.*;
+package utils;
+
+import panels.PopulationController;
+
+import javax.swing.JButton;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

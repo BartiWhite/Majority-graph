@@ -1,3 +1,10 @@
+package panels;
+
+import enums.Mode;
+import enums.Opinion;
+import utils.Button;
+import utils.TextField;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -5,11 +12,19 @@ import java.awt.GridLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JOptionPane;
 
 public class GraphicFrame extends JFrame {
 
@@ -24,6 +39,10 @@ public class GraphicFrame extends JFrame {
 	private final BlockingQueue<Boolean> nextStep = new ArrayBlockingQueue<>(1),
 			controlSimFlow = new ArrayBlockingQueue<>(1),
 			updateChart = new ArrayBlockingQueue<>(1);
+
+	private final List<Queue> queuesList = new ArrayList<>(List.of(graphQueue, chartQueue, opinionIndexesQueue,
+			nextStep, controlSimFlow, updateChart));
+
 	private final JButton start, stop, reset, stepOverStart, stepOverStop, stepOverReset, simulateButton, stepOverButton, manual;
 
 	private final Button agentUp, agentDown, initForDown, initForUp, speedUp, speedDown, forFieldButtonUp, forFieldButtonDown,
@@ -35,6 +54,8 @@ public class GraphicFrame extends JFrame {
 			forFieldTextField, againstFieldTextField, forZealotTextField, againstZealotTextField,
 			forChanceTextField, againstChanceTextField;
 
+	private final List<TextField> textFields = new ArrayList<>();
+
 	private final JPanel leftPanel, mainButtonsPanel, mainStepOverButtonPanel, populationCountButtonPanel,
 			fluentSpeedButtonPanel, stepOverSpeedButtonPanel, initForPanel, forFieldPanel, againstFieldPanel,
 			forZealotPanel, againstZealotPanel, forChancePanel, againstChancePanel;
@@ -43,6 +64,7 @@ public class GraphicFrame extends JFrame {
 			forZealotLabel, againstZealotLabel, forChanceLabel, againstChanceLabel;
 
 	private Integer numberOfAgents = 20, forZealots = 0, againstZealots = 0;
+
 	private Double initialFor = 0.5, forField = 0., againstField = 0., forChance = 1.0, againstChance = 1.0;
 
 	public GraphicFrame() {
@@ -102,7 +124,7 @@ public class GraphicFrame extends JFrame {
 		forChanceLabel = new JLabel("Set for chance", SwingConstants.CENTER);
 		againstChanceLabel = new JLabel("Set against chance", SwingConstants.CENTER);
 
-//		initTextFields();
+		// TextFields
 		populationCountTextField = new TextField(numberOfAgents, "20", mainButtons, 0, 1000);
 		initForTextField = new TextField(initialFor, "0.5", mainButtons, 0, 1);
 		forFieldTextField = new TextField(forField, "0", mainButtons, 0, 1);
@@ -114,6 +136,10 @@ public class GraphicFrame extends JFrame {
 		speedTextField = new TextField(pop, "1", mainButtons,0, 100);
 
 		stepOverSpeedTextField = new TextField(pop, "1", mainButtons,0, 100);
+
+		textFields.addAll(List.of(populationCountTextField, speedTextField, stepOverSpeedTextField, initForTextField,
+				forFieldTextField, againstFieldTextField, forZealotTextField, againstZealotTextField,
+				forChanceTextField, againstChanceTextField));
 
 		// Buttons
 		agentUp = new Button("Up", populationCountTextField, 3, 1000, 10);
@@ -138,7 +164,7 @@ public class GraphicFrame extends JFrame {
 		stepOverSpeedUp = new Button("Up", pop, speedTextField, 1, 100);
 		stepOverSpeedDown = new Button("Down", pop, speedTextField, 1, 100);
 
-		// TextField inject buttons
+		// utils.TextField inject buttons
 		populationCountTextField.addButtons(List.of(agentUp, agentDown));
 		speedTextField.addButtons(List.of(speedUp, speedDown));
 		initForTextField.addButtons(List.of(initForUp, initForDown));
@@ -461,15 +487,7 @@ public class GraphicFrame extends JFrame {
 	}
 
 	private void colorAllFields() {
-		populationCountTextField.setBackground(Color.white);
-		speedTextField.setBackground(Color.white);
-		initForTextField.setBackground(Color.white);
-		forFieldTextField.setBackground(Color.white);
-		againstFieldTextField.setBackground(Color.white);
-		forZealotTextField.setBackground(Color.white);
-		againstZealotTextField.setBackground(Color.white);
-		forChanceTextField.setBackground(Color.white);
-		againstChanceTextField.setBackground(Color.white);
+		textFields.forEach(t -> t.setBackground(Color.WHITE));
 	}
 
 	private void setMode(Mode mode) {
@@ -479,12 +497,7 @@ public class GraphicFrame extends JFrame {
 	}
 
 	private void cleanQueues() {
-		chartQueue.clear();
-		opinionIndexesQueue.clear();
-		controlSimFlow.clear();
-		updateChart.clear();
-		graphQueue.clear();
-		nextStep.clear();
+		queuesList.forEach(Collection::clear);
 	}
 
 	private void giveQueuesSomeFood() {

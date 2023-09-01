@@ -1,7 +1,12 @@
-import javax.swing.*;
+package utils;
+
+import panels.PopulationController;
+
+import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
 public class TextField extends JTextField {
