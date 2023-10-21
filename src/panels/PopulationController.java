@@ -49,32 +49,35 @@ public class PopulationController implements Runnable {
 			}
 		}
 
-		// make everybody a neighbor ( to be changed in a different society model)
+		// make everybody a neighbor
 		for (Person person : pop) {
 			for (Person neighbour : pop) {
-				if (!person.equals(neighbour))
+				if (!person.equals(neighbour)) {
 					person.addNeighbour(neighbour);
+				}
 			}
 		}
 
 		// make some a zealot
-		assert againstZealot <= populationCount * (1 - initialFor);
-		assert forZealot <= populationCount * initialFor;
 		for (int i = 0; i < forZealot; i++) {
-			int randomInt = random.nextInt((int) (populationCount * getInitialFor()));
-//			random.nextInt((int) (populationCount * getInitialFor()));
-			if (!pop.get(randomInt).isZealot()) {
-				pop.get(randomInt).setZealot(true);
-			} else
-				i--;
+			int randomInt;
+
+			do {
+				randomInt = random.nextInt((int) (populationCount * getInitialFor()));
+			} while (pop.get(randomInt).isZealot());
+
+			pop.get(randomInt).setZealot(true);
 		}
+
 		for (int i = 0; i < againstZealot; i++) {
-			int randomInt = (int) (populationCount * getInitialFor()) +  random.nextInt(pop.size() - (int) (populationCount * getInitialFor()));
-			if (!pop.get(randomInt).isZealot()) {
-				pop.get(randomInt).setZealot(true);
-			} else {
-				i--;
-			}
+			int randomInt;
+
+			do {
+				randomInt = (int) (populationCount * getInitialFor()) +
+						random.nextInt(pop.size() - (int) (populationCount * getInitialFor()));
+			} while (pop.get(randomInt).isZealot());
+
+			pop.get(randomInt).setZealot(true);
 		}
 	}
 
@@ -88,21 +91,22 @@ public class PopulationController implements Runnable {
 		for (int j = 0; j < Math.floor(populationCount / gatheringCount); j++) {
 			Person[] gathered = new Person[gatheringCount];
 			for (int i = 0; i < gatheringCount; i++) {
-				int number = random.nextInt(pop.size());
-				if (!pop.get(number).isGathered()) {
-					gathered[i] = pop.get(number);
-					gathered[i].setGathered(true);
-					opinions.add(number);
-				} else {
-					i--;
-				}
+				int number;
+
+				do {
+					number = random.nextInt(pop.size());
+				} while (pop.get(number).isGathered());
+
+				gathered[i] = pop.get(number);
+				gathered[i].setGathered(true);
+				opinions.add(number);
 			}
 
 			int consensus = 0;
 			for (Person person : gathered) {
 				consensus += person.getOpinion().opinionValue;
 			}
-			assert consensus != 0;
+
 			chance = random.nextDouble();
 			if (consensus < 0 && chance < againstChance) {
 				for (Person person : gathered) {
@@ -137,7 +141,7 @@ public class PopulationController implements Runnable {
 
 	@Override
 	public void run() {
-		Boolean bool;
+		boolean bool;
 		while (true) {
 			try {
 				if (isRunning) {
@@ -147,10 +151,12 @@ public class PopulationController implements Runnable {
 					if (mode == Mode.STEPOVER) {
 						opinionIndexesQueue.put(opinions);
 					}
-					if (mode == Mode.FLUENT)
+					if (mode == Mode.FLUENT) {
 						Thread.sleep((long) 1000 / simulationSpeed);
-					if (mode == Mode.STEPOVER)
+					}
+					if (mode == Mode.STEPOVER) {
 						bool = controlSimFlow.take();
+					}
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();

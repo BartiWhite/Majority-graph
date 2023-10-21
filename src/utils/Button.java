@@ -41,20 +41,21 @@ public class Button extends JButton {
 
     public void incrementDouble() {
         this.addActionListener(e -> {
-            if(Double.parseDouble(textField.getText()) < upperLimit)
+            if(Double.parseDouble(textField.getText()) < upperLimit) {
                 textField.setText(
                         String.valueOf(BigDecimal.valueOf(Double.parseDouble(textField.getText()) + doubleChange)
                                 .setScale(2, RoundingMode.HALF_UP)
                                 .doubleValue()));
+            }
             textField.colorTextFieldDouble();
         });
     }
 
     public void incrementInteger() {
         this.addActionListener(e -> {
-            if(Integer.parseInt(textField.getText()) < upperLimit)
-                textField.setText(
-                        String.valueOf(Integer.parseInt(textField.getText()) + intChange));
+            if(Integer.parseInt(textField.getText()) < upperLimit) {
+                textField.setText(String.valueOf(Integer.parseInt(textField.getText()) + intChange));
+            }
             textField.colorTextFieldInteger();
         });
     }
@@ -70,20 +71,22 @@ public class Button extends JButton {
 
     public void decrementDouble() {
         this.addActionListener(e -> {
-            if(Double.parseDouble(textField.getText()) > lowerLimit)
+            if(Double.parseDouble(textField.getText()) > lowerLimit) {
                 textField.setText(
                         String.valueOf(BigDecimal.valueOf(Double.parseDouble(textField.getText()) - doubleChange)
                                 .setScale(2, RoundingMode.HALF_UP)
                                 .doubleValue()));
+            }
             textField.colorTextFieldDouble();
         });
     }
 
     public void decrementInteger() {
         this.addActionListener(e -> {
-            if(Integer.parseInt(textField.getText()) > lowerLimit)
+            if(Integer.parseInt(textField.getText()) > lowerLimit) {
                 textField.setText(
                         String.valueOf(Integer.parseInt(textField.getText()) - intChange));
+            }
             textField.colorTextFieldInteger();
         });
     }
@@ -96,5 +99,4 @@ public class Button extends JButton {
             }
         });
     }
-
 }

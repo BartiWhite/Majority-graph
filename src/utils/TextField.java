@@ -67,8 +67,9 @@ public class TextField extends JTextField {
                             Integer.parseInt(TextField.super.getText()) <= upperLimit) {
                         pop.setSpeed(Integer.parseInt(TextField.super.getText()));
                         setTrue();
-                    } else
+                    } else {
                         setFalse();
+                    }
 
                     colorTextFieldSpeed();
                 } catch (NumberFormatException e1) {
@@ -112,8 +113,9 @@ public class TextField extends JTextField {
                             Double.parseDouble(TextField.super.getText()) <= upperLimit) {
                         value = Double.parseDouble(TextField.super.getText());
                         setTrue();
-                    } else
+                    } else {
                         setFalse();
+                    }
 
                     colorTextFieldDouble();
                 } catch (NumberFormatException e1) {
@@ -157,8 +159,9 @@ public class TextField extends JTextField {
                             Double.parseDouble(TextField.super.getText()) <= upperLimit) {
                         value = Double.parseDouble(TextField.super.getText());
                         setTrue();
-                    } else
+                    } else {
                         setFalse();
+                    }
 
                     colorTextFieldInteger();
                 } catch (NumberFormatException e1) {
@@ -180,44 +183,49 @@ public class TextField extends JTextField {
     }
 
     private void enableButtons(boolean isEnabled){
-        for(JButton button : mainButtons)
+        for(JButton button : mainButtons) {
             button.setEnabled(isEnabled);
+        }
     }
 
     public void colorTextFieldDouble() {
-        if (Double.parseDouble(this.getText()) > upperLimit)
+        if (Double.parseDouble(this.getText()) > upperLimit) {
             this.setBackground(Color.red);
-        else if (Double.parseDouble(this.getText()) < lowerLimit)
+        } else if (Double.parseDouble(this.getText()) < lowerLimit) {
             this.setBackground(Color.red);
-        else if (doubleParameter != Double.parseDouble(this.getText()))
+        } else if (doubleParameter != Double.parseDouble(this.getText())) {
             this.setBackground(Color.yellow);
-        else
+        } else {
             this.setBackground(Color.white);
+        }
     }
 
     public void colorTextFieldInteger() {
-        if (Integer.parseInt(this.getText()) > upperLimit)
+        if (Integer.parseInt(this.getText()) > upperLimit) {
             this.setBackground(Color.red);
-        else if (Integer.parseInt(this.getText()) < lowerLimit)
+        } else if (Integer.parseInt(this.getText()) < lowerLimit) {
             this.setBackground(Color.red);
-        else if (intParameter != Integer.parseInt(this.getText()))
+        } else if (intParameter != Integer.parseInt(this.getText())) {
             this.setBackground(Color.yellow);
-        else
+        } else {
             this.setBackground(Color.white);
+        }
     }
 
     public void colorTextFieldSpeed() {
-        if (Integer.parseInt(this.getText()) > upperLimit)
+        if (Integer.parseInt(this.getText()) > upperLimit) {
             this.setBackground(Color.red);
-        else if (Integer.parseInt(this.getText()) < lowerLimit)
+        } else if (Integer.parseInt(this.getText()) < lowerLimit) {
             this.setBackground(Color.red);
-        else
+        } else {
             this.setBackground(Color.white);
+        }
     }
 
     private void enableControlButtons(boolean isEnabled){
-        for(JButton button : controlButtons)
+        for(JButton button : controlButtons) {
             button.setEnabled(isEnabled);
+        }
     }
 
     public void addButtons(List<Button> controlButtons){

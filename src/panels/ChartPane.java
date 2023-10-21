@@ -18,6 +18,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import utils.Person;
 
 public class ChartPane extends JPanel implements Runnable {
 
@@ -64,12 +65,13 @@ public class ChartPane extends JPanel implements Runnable {
 	@Override
 	public void run() {
 
-		Boolean receiveMessage;
+		boolean receiveMessage;
 		while (true) {
 			try {
 				opinion = queue.take();
-				if (mode == Mode.STEPOVER)
+				if (mode == Mode.STEPOVER) {
 					receiveMessage = updateChart.take();
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -78,10 +80,11 @@ public class ChartPane extends JPanel implements Runnable {
 			int againstAgents = 0;
 
 			for (Opinion i : opinion)
-				if (i.opinionValue == 1)
+				if (i.opinionValue == 1) {
 					forAgents++;
-				else
+				} else {
 					againstAgents++;
+				}
 
 			List<Person> pop = Person.getPeople();
 

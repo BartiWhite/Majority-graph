@@ -7,16 +7,14 @@ import java.util.List;
 
 public class Person {
 
-	private final int id;
+	private static final List<Person> peopleList = new ArrayList<>();
+
 	private final List<Person> neighbours = new ArrayList<>();
 	private Opinion opinion;
 	private boolean isZealot = false;
 	private boolean isGathered = false;
 
-	private static final List<Person> peopleList = new ArrayList<>();
-
 	public Person() {
-		this.id = peopleList.isEmpty() ? 0 : peopleList.get(peopleList.size() - 1).id + 1;
 		peopleList.add(this);
 	}
 
@@ -37,7 +35,6 @@ public class Person {
 		if (!isZealot) {
 			this.opinion = opinion;
 		}
-
 	}
 
 	public static List<Person> getPeople() {

@@ -385,8 +385,7 @@ public class GraphicFrame extends JFrame {
 				pop.setIsRunning(true);
 				agentsPane.setSpeed(Integer.parseInt(stepOverSpeedTextField.getText()));
 				agentsPane.setSimulationStop(false);
-				if(agentsPane.getMode() == Mode.STEPOVER && agentsPane.getSimulation())
-				{
+				if(agentsPane.getMode() == Mode.STEPOVER && agentsPane.getSimulation()) {
 					try {
 						nextStep.put(true);
 					} catch (InterruptedException e1) {
@@ -456,16 +455,18 @@ public class GraphicFrame extends JFrame {
 				agentsPane.setSimulation(true);
 				stepOverButton.setEnabled(false);
 				simulateButton.setText("Step Over");
-				if (nextStep.isEmpty())
+				if (nextStep.isEmpty()) {
 					try {
 						nextStep.put(true);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
+				}
 			} else {
 				try {
-					if(nextStep.isEmpty())
+					if(nextStep.isEmpty()) {
 						nextStep.put(true);
+					}
 				} catch (InterruptedException ex) {
 					throw new RuntimeException(ex);
 				}

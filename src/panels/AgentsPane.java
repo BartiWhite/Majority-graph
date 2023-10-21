@@ -2,6 +2,7 @@ package panels;
 
 import enums.Mode;
 import enums.Opinion;
+import utils.Circle;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -63,8 +64,9 @@ public class AgentsPane extends JPanel implements Runnable {
 
 			try {
 				opinions = graphQueue.take();
-				if (mode == Mode.STEPOVER)
+				if (mode == Mode.STEPOVER) {
 					opinionIndexes = opinionIndexesQueue.take();
+				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -78,18 +80,20 @@ public class AgentsPane extends JPanel implements Runnable {
 
 		drawLines(g2d);
 
-		for (Circle circle : circles)
+		for (Circle circle : circles) {
 			circle.draw(g2d);
+		}
 	}
 
 	public void drawLines(Graphics2D g2d) {
 
-		if (coloredLine == lineColor.BLACKLINE)
+		if (coloredLine == lineColor.BLACKLINE) {
 			g2d.setColor(Color.black);
-		else if (coloredLine == lineColor.REDLINE)
+		} else if (coloredLine == lineColor.REDLINE) {
 			g2d.setColor(Color.red);
-		else if (coloredLine == lineColor.BLUELINE)
+		} else if (coloredLine == lineColor.BLUELINE) {
 			g2d.setColor(Color.blue);
+		}
 
 		if (mode == Mode.STEPOVER && index1 != -1) {
 			g2d.drawLine(circles.get(index1).getX() + 8, circles.get(index1).getY() + 8, circles.get(index2).getX() + 8,
@@ -107,8 +111,9 @@ public class AgentsPane extends JPanel implements Runnable {
 			Opinion opinion;
 
 			for (int i = 0; i < opinionIndexes.size(); i += 3) {
-				if(mode != Mode.STEPOVER)
+				if(mode != Mode.STEPOVER) {
 					break;
+				}
 				index1 = opinionIndexes.get(i);
 				index2 = opinionIndexes.get(i + 1);
 				index3 = opinionIndexes.get(i + 2);
@@ -116,21 +121,24 @@ public class AgentsPane extends JPanel implements Runnable {
 
 				coloredLine = lineColor.BLACKLINE;
 
-				if(i == 0)
+				if(i == 0) {
 					repaint();
+				}
 
-				if(!simulation)
-				{
+				if(!simulation) {
 					try {
 						Boolean receiveMessage = nextStep.take();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-				if(breakSimulation())
+
+				if(breakSimulation()) {
 					break;
-				if (mode == Mode.FLUENT)
+				}
+				if (mode == Mode.FLUENT) {
 					break;
+				}
 
 				repaint();
 
@@ -151,20 +159,22 @@ public class AgentsPane extends JPanel implements Runnable {
 
 				if (!simulation) {
 					try {
-						Boolean receiveMessage = nextStep.take();
+						boolean receiveMessage = nextStep.take();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 				}
-				if(breakSimulation())
+				if(breakSimulation()) {
 					break;
+				}
 
-				if (mode == Mode.FLUENT)
+				if (mode == Mode.FLUENT) {
 					break;
+				}
 
 				if (simulationStop) {
 					try {
-						Boolean receiveMessage = nextStep.take();
+						boolean receiveMessage = nextStep.take();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -172,20 +182,18 @@ public class AgentsPane extends JPanel implements Runnable {
 
 				repaint();
 
-				if (simulation)
+				if (simulation) {
 					try {
 						Thread.sleep((long) 1000 / simulationSpeed);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
+				}
 
-				if(index1 == -1)
-				{
+				if(index1 == -1) {
 					for(Circle circle : circles)
 						circle.setOvalColor(Color.black);
-				}
-				else
-				{
+				} else {
 					circles.get(index1).setOvalColor(Color.black);
 					circles.get(index2).setOvalColor(Color.black);
 					circles.get(index3).setOvalColor(Color.black);
@@ -193,9 +201,9 @@ public class AgentsPane extends JPanel implements Runnable {
 			}
 		} else {
 			for (int i = 0; i < numberOfAgents; i++) {
-				if (opinions.get(i).opinionValue == 1)
+				if (opinions.get(i).opinionValue == 1) {
 					color = Color.blue;
-				else {
+				} else {
 					color = Color.red;
 				}
 				circles.get(i).setColor(color);
@@ -224,9 +232,9 @@ public class AgentsPane extends JPanel implements Runnable {
 			} while (coordinates.contains(x));
 			coordinates.add(x);
 
-			if (opinions.get(i).opinionValue == 1)
+			if (opinions.get(i).opinionValue == 1) {
 				color = Color.blue;
-			else {
+			} else {
 				color = Color.red;
 			}
 
@@ -234,10 +242,8 @@ public class AgentsPane extends JPanel implements Runnable {
 		}
 	}
 
-	private boolean breakSimulation()
-	{
-		if(newSimulation)
-		{
+	private boolean breakSimulation() {
+		if(newSimulation) {
 			newSimulation = false;
 			return true;
 		}
@@ -256,11 +262,12 @@ public class AgentsPane extends JPanel implements Runnable {
 		index1 = -1;
 
 		int popPart = (int) Math.round(initFor * numberOfAgents);
-		for (int i = 0; i < numberOfAgents; i++)
+		for (int i = 0; i < numberOfAgents; i++) {
 			if (i < popPart)
 				opinions.add(Opinion.FOR);
 			else
 				opinions.add(Opinion.AGAINST);
+		}
 
 		setCoordinates();
 		repaint();
